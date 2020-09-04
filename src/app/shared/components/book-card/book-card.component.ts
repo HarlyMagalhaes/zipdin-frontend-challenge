@@ -14,4 +14,12 @@ export class BookCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  favorite(id: string) {
+    let favorites = JSON.parse(localStorage.getItem('@favorites')) || [];
+    favorites.push(id);
+    localStorage.setItem('@favorites', JSON.stringify(favorites));
+
+    this.book.isFavorite = !this.book.isFavorite;
+  }
 }
