@@ -1,1 +1,11 @@
-<p>landing works!</p>
+<main>
+  <mat-form-field class="search_input" color="secondary">
+    <input matInput placeholder="Pesquisar por nome..." autocomplete="off" [value]="search"
+      (input)="onSearch($event.target.value)">
+  </mat-form-field>
+  <mat-grid-list cols="7" rowHeight="1:1.5">
+    <mat-grid-tile *ngFor="let book of books">
+      <book-card [book]="book"></book-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</main>
