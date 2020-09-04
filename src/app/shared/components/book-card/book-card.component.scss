@@ -1,0 +1,15 @@
+.card_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .thumbnail {
+    max-width: 15rem;
+    max-height: 20rem;
+    height: auto;
+    width: auto;
+    border-radius: 1rem;
+  }
+
+}
+
