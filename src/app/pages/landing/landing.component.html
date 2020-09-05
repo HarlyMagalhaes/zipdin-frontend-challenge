@@ -1,4 +1,5 @@
 <main>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput placeholder="Pesquisar..." autocomplete="off" [(ngModel)]="search">
@@ -34,7 +35,6 @@
 
 
   <div style="margin-top: 4rem;">
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
       (page)="onPageEvent($event)">
     </mat-paginator>
