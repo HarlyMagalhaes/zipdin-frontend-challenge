@@ -9,15 +9,15 @@
     </button>
   </mat-form-field>
 
-  <mat-tab-group dynamicHeight (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
+  <mat-tab-group (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
     <mat-tab>
-      <books-list [booksList]="books" [hasBooks]="hasBooks"></books-list>
+      <books-list [booksList]="books" [hasBooks]="hasBooks" (reload)="getReference()"></books-list>
       <ng-template mat-tab-label>
         <mat-icon>home</mat-icon>
       </ng-template>
     </mat-tab>
     <mat-tab>
-      <books-list [booksList]="favoriteBooks" [hasBooks]="hasBooks"></books-list>
+      <books-list [booksList]="favoriteBooks" [hasBooks]="hasBooks" (reload)="getReference()"></books-list>
       <ng-template mat-tab-label>
         <mat-icon>favorites</mat-icon>
       </ng-template>

@@ -1,30 +1,3 @@
-<!-- <div class="card_container">
-  <img class="thumbnail" *ngIf="book.thumbnail.length > 0" mat-card-image src="{{ book.thumbnail }}">
-
-  <div class="card-info">
-    <div class="card-header">
-      <div class="card-title">
-        {{ book.title }}
-      </div>
-      <div class="card-subtitle">
-        {{ book.authors }}
-      </div>
-    </div>
-    <div class="card-footer">
-      <button mat-icon-button color="primary" (click)="favorite(book.id, !book.isFavorite)"
-      aria-label="Example icon button with a heart icon">
-      <div *ngIf="book.isFavorite; then isTrue else isFalse"></div>
-      <ng-template #isTrue>
-        <mat-icon>favorite</mat-icon>
-      </ng-template>
-      <ng-template #isFalse>
-        <mat-icon>favorite_border</mat-icon>
-      </ng-template>
-    </button>
-  </div>
-</div>
-</div> -->
-
 <mat-card>
   <div class="card-image">
     <img *ngIf="book.thumbnail.length > 0" src="{{ book.thumbnail }}">

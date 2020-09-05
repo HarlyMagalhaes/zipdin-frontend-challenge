@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/core/models/book.model';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'book-card',
   templateUrl: './book-card.component.html',
@@ -10,7 +12,9 @@ export class BookCardComponent implements OnInit {
 
   @Input() book: Book;
 
-  constructor() { }
+  constructor(
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
   }
@@ -36,5 +40,13 @@ export class BookCardComponent implements OnInit {
 
     localStorage.setItem('@favoriteIds', JSON.stringify(favoriteIds));
     localStorage.setItem('@favoriteBooks', JSON.stringify(favoriteBooks));
+
+    this.openSnackbar(isAdd);
+  }
+
+  openSnackbar(isAdd: boolean) {
+    this._snackBar.open(`Livro ${isAdd ? 'adicionado' : 'removido'} dos favoritos!`, 'Fechar', {
+      duration: 3000,
+    })
   }
 }
