@@ -8,7 +8,10 @@
     <book-card *ngFor="let book of books" [book]="book"></book-card>
   </div>
 
-  <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
-    (page)="onPageEvent($event)">
-  </mat-paginator>
+  <div [style.margin-top.rem]="2">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageEvent($event)">
+    </mat-paginator>
+  </div>
 </main>

@@ -5,7 +5,6 @@ import { BooksService } from 'src/app/core/services/books.service';
 
 import { Book } from 'src/app/core/models/book.model';
 import { BooksParams } from 'src/app/core/models/books-api-params.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-landing',
@@ -15,6 +14,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class LandingComponent implements OnInit {
   search: string = 'angular';
   books: Book[] = [];
+  loading: boolean = false;
 
   pageSizeOptions: number[] = [5, 10, 20, 40];
 
@@ -39,11 +39,12 @@ export class LandingComponent implements OnInit {
       maxResults: String(this.pageEvent.pageSize),
     }
 
+    this.loading = true;
     this.bookService.getBooks(params)
       .subscribe((data: any) => {
-        console.log(data);
         this.books = data;
         this.pageEvent.length = this.books[0].totalItems;
+        this.loading = false;
       });
   }
 

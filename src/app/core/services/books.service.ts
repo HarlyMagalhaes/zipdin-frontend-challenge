@@ -26,7 +26,7 @@ export class BooksService {
           let totalItems: number = data.totalItems;
 
           const books: Book[] = data.items.map((item) => {
-            let { id, volumeInfo, accessInfo, saleInfo } = item;
+            let { id, volumeInfo } = item;
             let favorites = localStorage.getItem('@favorites') || [];
 
             const book: Book = {
@@ -41,8 +41,6 @@ export class BooksService {
               printType: volumeInfo.printType,
               publishedDate: volumeInfo.publishedDate,
               publisher: volumeInfo.publisher,
-              saleInfo: saleInfo,
-              accessInfo: accessInfo,
               totalItems: totalItems,
             }
 
