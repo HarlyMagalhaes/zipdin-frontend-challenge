@@ -2,12 +2,13 @@
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput placeholder="Pesquisar..." autocomplete="off" [(ngModel)]="search">
-    <button mat-icon-button matSuffix color="primary" (click)="getBooks()">
+    <button mat-icon-button matSuffix color="primary" (click)="getReference()"
+      style="font-size: 2.4rem; height: 2.8rem; width: 2.8rem;">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
 
-  <mat-tab-group (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
+  <mat-tab-group dynamicHeight (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
     <mat-tab>
       <div *ngIf="hasBooks" class="books-grid">
         <book-card *ngFor="let book of books" [book]="book"></book-card>
@@ -21,7 +22,7 @@
     <mat-tab label="Favoritos">
 
       <div *ngIf="hasBooks" class="books-grid">
-        <book-card *ngFor="let book of books" [book]="book"></book-card>
+        <book-card *ngFor="let book of favoriteBooks" [book]="book"></book-card>
       </div>
       <no-results *ngIf="!hasBooks"></no-results>
       <ng-template mat-tab-label>

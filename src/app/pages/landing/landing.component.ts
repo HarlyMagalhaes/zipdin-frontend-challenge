@@ -16,6 +16,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class LandingComponent implements OnInit {
   search: string = '';
   books: Book[] = [];
+  favoriteBooks: Book[] = [];
   loading: boolean = false;
   hasBooks: boolean = false;
 
@@ -79,22 +80,28 @@ export class LandingComponent implements OnInit {
   }
 
   getFavoriteBooks() {
-    let favoriteBooks: Book[] = JSON.parse(localStorage.getItem('@favoriteBooks'));
-    let index: number = this.pageEvent.pageIndex * this.pageEvent.pageSize;
+    this.loading = true;
 
-    favoriteBooks = favoriteBooks.filter(
-      (value: Book) => value.title.toLowerCase().includes(this.search.toLowerCase())
-    );
+    try {
+      let favoriteBooks: Book[] = JSON.parse(localStorage.getItem('@favoriteBooks'));
+      let index: number = this.pageEvent.pageIndex * this.pageEvent.pageSize;
 
-    this.pageEvent.length = favoriteBooks.length;
-    this.books = favoriteBooks.slice(
-      index,
-      index + this.pageEvent.pageSize
-    );
+      favoriteBooks = favoriteBooks.filter(
+        (value: Book) => value.title.toLowerCase().includes(this.search.toLowerCase())
+      );
 
+      this.pageEvent.length = favoriteBooks.length;
+      this.favoriteBooks = favoriteBooks.slice(
+        index,
+        index + this.pageEvent.pageSize
+      );
 
-    console.log(this.books);
-    this.hasBooks = this.books.length > 0;
+      this.hasBooks = this.favoriteBooks.length > 0;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.loading = false;
+    }
   }
 
   onPageEvent(event: PageEvent) {
@@ -104,13 +111,16 @@ export class LandingComponent implements OnInit {
 
   onTabChanged(event: MatTabChangeEvent) {
     this.tabSelected = event.index;
+    this.search = '';
 
     this.pageEvent = {
       pageIndex: 0,
       pageSize: 10,
       length: 0,
     };
+
     this.books.length = 0;
+    this.favoriteBooks.length = 0;
 
     this.getReference();
   }
