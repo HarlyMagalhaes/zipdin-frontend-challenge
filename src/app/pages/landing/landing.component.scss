@@ -2,7 +2,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  height: 100%;
   padding: 5rem 10rem;
+  box-sizing: border-box;
 
   .mat-grid-tile {
     display: flex;
@@ -24,6 +26,9 @@ main {
     }
   }
 
+  no-results {
+    flex-grow: 1;
+  }
 }
 
 @media (max-width: 800px) {

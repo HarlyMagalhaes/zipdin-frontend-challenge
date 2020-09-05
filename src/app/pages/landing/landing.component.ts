@@ -12,9 +12,10 @@ import { BooksParams } from 'src/app/core/models/books-api-params.model';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  search: string = 'angular';
+  search: string = '';
   books: Book[] = [];
   loading: boolean = false;
+  hasBooks: boolean = false;
 
   pageSizeOptions: number[] = [5, 10, 20, 40];
 
@@ -29,23 +30,32 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBooks();
+
   }
 
-  getBooks() {
+  async getBooks() {
     let params: BooksParams = {
       q: this.search,
       startIndex: String(this.pageEvent.pageIndex * this.pageEvent.pageSize),
       maxResults: String(this.pageEvent.pageSize),
-    }
+    };
 
     this.loading = true;
-    this.bookService.getBooks(params)
-      .subscribe((data: any) => {
-        this.books = data;
-        this.pageEvent.length = this.books[0].totalItems;
-        this.loading = false;
-      });
+    try {
+      this.bookService.getBooks(params)
+        .subscribe((data: any) => {
+          this.books = data;
+          this.pageEvent.length = this.books[0].totalItems;
+          this.loading = false;
+          this.hasBooks = this.books.length > 0;
+        });
+    }
+
+    catch (error) {
+      console.error(error);
+      this.loading = false;
+      this.hasBooks = false;
+    }
   }
 
   onPageEvent(event: PageEvent) {
@@ -56,5 +66,4 @@ export class LandingComponent implements OnInit {
   onSearch(value: string) {
     this.search = value;
   }
-
 }
