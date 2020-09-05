@@ -12,9 +12,10 @@ import { BooksParams } from 'src/app/core/models/books-api-params.model';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  search: string = 'angular';
+  search: string = '';
   books: Book[] = [];
   loading: boolean = false;
+  hasBooks: boolean = false;
 
   pageSizeOptions: number[] = [5, 10, 20, 40];
 
@@ -29,7 +30,9 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBooks();
+    document.addEventListener('keydown', ({ key }) => {
+      if (key == "Enter") this.getBooks()
+    });
   }
 
   getBooks() {
@@ -37,15 +40,27 @@ export class LandingComponent implements OnInit {
       q: this.search,
       startIndex: String(this.pageEvent.pageIndex * this.pageEvent.pageSize),
       maxResults: String(this.pageEvent.pageSize),
-    }
+    };
 
     this.loading = true;
+
     this.bookService.getBooks(params)
-      .subscribe((data: any) => {
-        this.books = data;
-        this.pageEvent.length = this.books[0].totalItems;
-        this.loading = false;
-      });
+      .subscribe(
+        (data: any) => {
+          this.books = data;
+          this.pageEvent.length = data.length > 0 ? data[0].totalItems : 0;
+          console.log(this.books);
+        },
+        (error) => {
+          console.error(error);
+          this.loading = false;
+          this.hasBooks = false;
+        },
+        () => {
+          this.loading = false;
+          this.hasBooks = this.books.length > 0;
+        }
+      );
   }
 
   onPageEvent(event: PageEvent) {
@@ -53,8 +68,9 @@ export class LandingComponent implements OnInit {
     this.getBooks();
   }
 
-  onSearch(value: string) {
-    this.search = value;
+  ngOnDestroy(): void {
+    document.removeEventListener('keydown', ({ key }) => {
+      if (key == "Enter") this.getBooks()
+    });
   }
-
 }

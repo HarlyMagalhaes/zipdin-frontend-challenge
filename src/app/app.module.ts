@@ -11,12 +11,14 @@ import { LandingComponent } from './pages/landing/landing.component';
 
 import { MaterialModule } from './material.module';
 import { BookCardComponent } from './shared/components/book-card/book-card.component';
+import { NoResultsComponent } from './shared/components/no-results/no-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    BookCardComponent
+    BookCardComponent,
+    NoResultsComponent
   ],
   imports: [
     BrowserModule,

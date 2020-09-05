@@ -2,7 +2,6 @@
   <img class="thumbnail" *ngIf="book.thumbnail.length > 0" mat-card-image src="{{ book.thumbnail }}">
   <div class="thumb_substitute" *ngIf="book.thumbnail.length == 0">
     <mat-icon>insert_photo</mat-icon>
-
   </div>
 
   <div class="card-info">
@@ -17,8 +16,13 @@
     <div class="card-footer">
       <button mat-icon-button color="primary" (click)="favorite(book.id)"
         aria-label="Example icon button with a heart icon">
-        <mat-icon *ngIf="book.isFavorite">favorite</mat-icon>
-        <mat-icon *ngIf="!book.isFavorite">favorite_border</mat-icon>
+        <div *ngIf="book.isFavorite; then isTrue else isFalse"></div>
+        <ng-template #isTrue>
+          <mat-icon>favorite</mat-icon>
+        </ng-template>
+        <ng-template #isFalse>
+          <mat-icon>favorite_border</mat-icon>
+        </ng-template>
       </button>
     </div>
   </div>
