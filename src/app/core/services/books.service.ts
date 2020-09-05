@@ -29,7 +29,7 @@ export class BooksService {
           if (totalItems > 0) {
             books = data.items.map((item) => {
               let { id, volumeInfo } = item;
-              let favorites = localStorage.getItem('@favorites') || [];
+              let favoriteIds = localStorage.getItem('@favoriteIds') || [];
 
               const book: Book = {
                 id: id,
@@ -39,7 +39,7 @@ export class BooksService {
                 description: volumeInfo.description,
                 thumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : '',
                 smallThumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.smallThumbnail : '',
-                isFavorite: favorites.includes(id),
+                isFavorite: favoriteIds.includes(id),
                 printType: volumeInfo.printType,
                 publishedDate: volumeInfo.publishedDate,
                 publisher: volumeInfo.publisher,

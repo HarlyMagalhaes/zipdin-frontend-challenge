@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button mat-icon-button color="primary" (click)="favorite(book.id)"
+      <button mat-icon-button color="primary" (click)="favorite(book.id, !book.isFavorite)"
         aria-label="Example icon button with a heart icon">
         <div *ngIf="book.isFavorite; then isTrue else isFalse"></div>
         <ng-template #isTrue>

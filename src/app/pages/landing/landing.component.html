@@ -1,19 +1,40 @@
 <main>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput placeholder="Pesquisar..." autocomplete="off" [(ngModel)]="search">
-    <button mat-icon-button matSuffix color="primary" (click)="getBooks()">
+    <button mat-icon-button matSuffix color="primary" (click)="getReference()"
+      style="font-size: 2.4rem; height: 2.8rem; width: 2.8rem;">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
 
-  <div *ngIf="hasBooks" class="books-grid">
-    <book-card *ngFor="let book of books" [book]="book"></book-card>
-  </div>
-  <no-results *ngIf="!hasBooks"></no-results>
+  <mat-tab-group dynamicHeight (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
+    <mat-tab>
+      <div *ngIf="hasBooks" class="books-grid">
+        <book-card *ngFor="let book of books" [book]="book"></book-card>
+      </div>
+      <no-results *ngIf="!hasBooks"></no-results>
+      <ng-template mat-tab-label>
+        <mat-icon>search</mat-icon>
+        Pesquisar
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Favoritos">
+
+      <div *ngIf="hasBooks" class="books-grid">
+        <book-card *ngFor="let book of favoriteBooks" [book]="book"></book-card>
+      </div>
+      <no-results *ngIf="!hasBooks"></no-results>
+      <ng-template mat-tab-label>
+        <mat-icon>favorite</mat-icon>
+        Favoritos
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
 
   <div style="margin-top: 4rem;">
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
       (page)="onPageEvent($event)">
     </mat-paginator>
