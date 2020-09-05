@@ -30,7 +30,9 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    document.addEventListener('keydown', ({ key }) => {
+      if (key == "Enter") this.getBooks()
+    });
   }
 
   async getBooks() {
@@ -63,7 +65,10 @@ export class LandingComponent implements OnInit {
     this.getBooks();
   }
 
-  onSearch(value: string) {
-    this.search = value;
+
+  ngOnDestroy(): void {
+    document.removeEventListener('keydown', ({ key }) => {
+      if (key == "Enter") this.getBooks()
+    });
   }
 }
