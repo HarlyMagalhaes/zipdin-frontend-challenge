@@ -1,0 +1,6 @@
+<mat-list *ngIf="hasBooks">
+  <mat-list-item *ngFor="let book of booksList">
+    <book-card [book]="book"></book-card>
+  </mat-list-item>
+</mat-list>
+<no-results *ngIf="!hasBooks"></no-results>
