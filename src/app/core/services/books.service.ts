@@ -24,28 +24,31 @@ export class BooksService {
       .pipe(
         map((data: any) => {
           let totalItems: number = data.totalItems;
+          let books: Book[] = [];
 
-          const books: Book[] = data.items.map((item) => {
-            let { id, volumeInfo } = item;
-            let favorites = localStorage.getItem('@favorites') || [];
+          if (totalItems > 0) {
+            books = data.items.map((item) => {
+              let { id, volumeInfo } = item;
+              let favorites = localStorage.getItem('@favorites') || [];
 
-            const book: Book = {
-              id: id,
-              title: volumeInfo.title,
-              authors: volumeInfo.authors,
-              categories: volumeInfo.categories,
-              description: volumeInfo.description,
-              thumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : '',
-              smallThumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.smallThumbnail : '',
-              isFavorite: favorites.includes(id),
-              printType: volumeInfo.printType,
-              publishedDate: volumeInfo.publishedDate,
-              publisher: volumeInfo.publisher,
-              totalItems: totalItems,
-            }
+              const book: Book = {
+                id: id,
+                title: volumeInfo.title,
+                authors: volumeInfo.authors,
+                categories: volumeInfo.categories,
+                description: volumeInfo.description,
+                thumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : '',
+                smallThumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.smallThumbnail : '',
+                isFavorite: favorites.includes(id),
+                printType: volumeInfo.printType,
+                publishedDate: volumeInfo.publishedDate,
+                publisher: volumeInfo.publisher,
+                totalItems: totalItems,
+              }
 
-            return book;
-          });
+              return book;
+            });
+          }
 
           return books;
         })

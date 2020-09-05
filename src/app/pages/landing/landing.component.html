@@ -1,13 +1,11 @@
 <main>
-  <div class="search_input">
-    <mat-form-field>
-      <input matInput placeholder="Pesquisar por nome..." autocomplete="off" [(ngModel)]="search">
-    </mat-form-field>
-
-    <button mat-mini-fab color="primary" (click)="getBooks()">
+  <mat-form-field>
+    <mat-label>Pesquisar</mat-label>
+    <input matInput placeholder="Pesquisar..." autocomplete="off" [(ngModel)]="search">
+    <button mat-icon-button matSuffix color="primary" (click)="getBooks()">
       <mat-icon>search</mat-icon>
     </button>
-  </div>
+  </mat-form-field>
 
   <div *ngIf="hasBooks" class="books-grid">
     <book-card *ngFor="let book of books" [book]="book"></book-card>

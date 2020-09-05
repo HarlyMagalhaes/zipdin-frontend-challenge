@@ -35,7 +35,7 @@ export class LandingComponent implements OnInit {
     });
   }
 
-  async getBooks() {
+  getBooks() {
     let params: BooksParams = {
       q: this.search,
       startIndex: String(this.pageEvent.pageIndex * this.pageEvent.pageSize),
@@ -43,28 +43,30 @@ export class LandingComponent implements OnInit {
     };
 
     this.loading = true;
-    try {
-      this.bookService.getBooks(params)
-        .subscribe((data: any) => {
+
+    this.bookService.getBooks(params)
+      .subscribe(
+        (data: any) => {
           this.books = data;
-          this.pageEvent.length = this.books[0].totalItems;
+          this.pageEvent.length = data.length > 0 ? data[0].totalItems : 0;
+          console.log(this.books);
+        },
+        (error) => {
+          console.error(error);
+          this.loading = false;
+          this.hasBooks = false;
+        },
+        () => {
           this.loading = false;
           this.hasBooks = this.books.length > 0;
-        });
-    }
-
-    catch (error) {
-      console.error(error);
-      this.loading = false;
-      this.hasBooks = false;
-    }
+        }
+      );
   }
 
   onPageEvent(event: PageEvent) {
     this.pageEvent = event;
     this.getBooks();
   }
-
 
   ngOnDestroy(): void {
     document.removeEventListener('keydown', ({ key }) => {
