@@ -7,18 +7,27 @@
     </button>
   </mat-form-field>
 
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Pesquisar" (click)="tab = 'search'">
+  <mat-tab-group (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
+    <mat-tab>
       <div *ngIf="hasBooks" class="books-grid">
         <book-card *ngFor="let book of books" [book]="book"></book-card>
       </div>
       <no-results *ngIf="!hasBooks"></no-results>
+      <ng-template mat-tab-label>
+        <mat-icon>search</mat-icon>
+        Pesquisar
+      </ng-template>
     </mat-tab>
-    <mat-tab label="Favoritos" (click)="tab = 'favorites'">
+    <mat-tab label="Favoritos">
+
       <div *ngIf="hasBooks" class="books-grid">
         <book-card *ngFor="let book of books" [book]="book"></book-card>
       </div>
       <no-results *ngIf="!hasBooks"></no-results>
+      <ng-template mat-tab-label>
+        <mat-icon>favorite</mat-icon>
+        Favoritos
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 

@@ -6,8 +6,15 @@ main {
   padding: 5rem 10rem;
   box-sizing: border-box;
 
-  .mat-form-field {
+  .mat-tab-group {
+    flex-grow: 1;
 
+    .mat-tab-body-wrapper {
+      flex-grow: 1;
+    }
+  }
+
+  .mat-form-field {
     button {
       font-size: 2.4rem;
     }
