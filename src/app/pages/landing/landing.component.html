@@ -1,1 +1,17 @@
-<p>landing works!</p>
+<main>
+  <mat-form-field class="search_input">
+    <input matInput placeholder="Pesquisar por nome..." autocomplete="off" [value]="search"
+      (input)="onSearch($event.target.value)">
+  </mat-form-field>
+
+  <div class="books-grid">
+    <book-card *ngFor="let book of books" [book]="book"></book-card>
+  </div>
+
+  <div style="margin-top: 4rem;">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageEvent($event)">
+    </mat-paginator>
+  </div>
+</main>
