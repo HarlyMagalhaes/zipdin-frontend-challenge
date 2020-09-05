@@ -3,7 +3,12 @@
     <input matInput placeholder="Pesquisar por nome..." autocomplete="off" [value]="search"
       (input)="onSearch($event.target.value)">
   </mat-form-field>
-  <div class="books-grid">
+
+  <div *ngIf="pageEvent" class="books-grid">
     <book-card *ngFor="let book of books" [book]="book"></book-card>
   </div>
+
+  <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageEvent($event)">
+  </mat-paginator>
 </main>

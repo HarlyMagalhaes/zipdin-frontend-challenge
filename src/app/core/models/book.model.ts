@@ -10,6 +10,5 @@ export interface Book {
   authors: String[];
   categories: String[];
   isFavorite: boolean;
-  saleInfo: Object;
-  accessInfo: Object;
+  totalItems: number;
 }

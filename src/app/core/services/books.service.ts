@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
 import { Book } from '../models/book.model';
+import { BooksParams } from '../models/books-api-params.model';
 
 import { map } from 'rxjs/operators';
 
@@ -16,11 +17,15 @@ export class BooksService {
     this.urlBase = environment.urlBase;
   }
 
-  getBooks(searchTerms: string) {
-    return this.http.get<Book[]>(`${this.urlBase}/volumes?q=${searchTerms}&maxResults=40`)
+  getBooks(params: BooksParams) {
+    return this.http.get<Book[]>(`${this.urlBase}/volumes`, {
+      params: { ...params }
+    })
       .pipe(
         map((data: any) => {
-          const books: Book[] = data.items.map((item, index: number) => {
+          let totalItems: number = data.totalItems;
+
+          const books: Book[] = data.items.map((item) => {
             let { id, volumeInfo, accessInfo, saleInfo } = item;
             let favorites = localStorage.getItem('@favorites') || [];
 
@@ -38,6 +43,7 @@ export class BooksService {
               publisher: volumeInfo.publisher,
               saleInfo: saleInfo,
               accessInfo: accessInfo,
+              totalItems: totalItems,
             }
 
             return book;
