@@ -16,10 +16,14 @@ export class BookCardComponent implements OnInit {
   }
 
   favorite(id: string) {
-    let favorites = JSON.parse(localStorage.getItem('@favorites')) || [];
-    favorites.push(id);
-    localStorage.setItem('@favorites', JSON.stringify(favorites));
+    let favoritesIds = JSON.parse(localStorage.getItem('@favoriteIds')) || [];
+    let favoriteBooks = JSON.parse(localStorage.getItem('@favoriteBooks')) || [];
 
+    favoritesIds.push(id);
+    favoriteBooks.push(this.book);
+
+    localStorage.setItem('@favoriteIds', JSON.stringify(favoritesIds));
     this.book.isFavorite = !this.book.isFavorite;
+    localStorage.setItem('@favoriteBooks', JSON.stringify(favoriteBooks));
   }
 }
