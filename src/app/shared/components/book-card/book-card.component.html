@@ -19,9 +19,9 @@
           <mat-icon>favorite_border</mat-icon>
         </ng-template>
       </button>
-      <button mat-button color="primary">
+      <a [routerLink]="['/', book.id] " mat-button color="primary">
         Mais detalhes <mat-icon>arrow_forward</mat-icon>
-      </button>
+      </a>
     </mat-card-actions>
   </div>
 </mat-card>
