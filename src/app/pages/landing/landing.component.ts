@@ -86,15 +86,12 @@ export class LandingComponent implements OnInit {
       let favoriteBooks: Book[] = JSON.parse(localStorage.getItem('@favoriteBooks'));
       let index: number = this.pageEvent.pageIndex * this.pageEvent.pageSize;
 
-      favoriteBooks = favoriteBooks.filter(
-        (value: Book) => value.title.toLowerCase().includes(this.search.toLowerCase())
-      );
+      favoriteBooks = favoriteBooks
+        .filter((value: Book) => value.title.toLowerCase().includes(this.search.toLowerCase()))
+        .slice(index, index + this.pageEvent.pageSize);
 
       this.pageEvent.length = favoriteBooks.length;
-      this.favoriteBooks = favoriteBooks.slice(
-        index,
-        index + this.pageEvent.pageSize
-      );
+      this.favoriteBooks = favoriteBooks;
 
       this.hasBooks = this.favoriteBooks.length > 0;
     } catch (error) {
@@ -111,7 +108,6 @@ export class LandingComponent implements OnInit {
 
   onTabChanged(event: MatTabChangeEvent) {
     this.tabSelected = event.index;
-    this.search = '';
 
     this.pageEvent = {
       pageIndex: 0,

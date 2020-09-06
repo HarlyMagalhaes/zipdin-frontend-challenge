@@ -1,0 +1,19 @@
+.mat-list {
+  flex-grow: 1;
+  overflow: auto;
+  box-sizing: border-box;
+
+  .mat-list-item {
+    height: auto !important;
+    padding: 1rem 0rem;
+    box-sizing: border-box;
+
+    book-card {
+      width: 100%;
+    }
+    no-results {
+      flex-grow: 1;
+    }
+  }
+}
+

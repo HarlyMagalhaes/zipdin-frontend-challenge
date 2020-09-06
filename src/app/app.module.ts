@@ -12,13 +12,15 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { MaterialModule } from './material.module';
 import { BookCardComponent } from './shared/components/book-card/book-card.component';
 import { NoResultsComponent } from './shared/components/no-results/no-results.component';
+import { BooksListComponent } from './shared/components/books-list/books-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     BookCardComponent,
-    NoResultsComponent
+    NoResultsComponent,
+    BooksListComponent
   ],
   imports: [
     BrowserModule,
