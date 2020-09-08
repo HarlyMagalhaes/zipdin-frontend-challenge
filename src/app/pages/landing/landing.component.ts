@@ -108,7 +108,7 @@ export class LandingComponent implements OnInit {
 
   onTabChanged(event: MatTabChangeEvent) {
     this.tabSelected = event.index;
-
+    this.search = '';
     this.pageEvent = {
       pageIndex: 0,
       pageSize: 10,

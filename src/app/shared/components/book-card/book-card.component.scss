@@ -27,6 +27,12 @@
       height: 100%;
     }
   }
+
+  .card-content {
+    .mat-card-content {
+      text-align: justify;
+    }
+  }
 }
 
 @media (max-width: 1000px) {

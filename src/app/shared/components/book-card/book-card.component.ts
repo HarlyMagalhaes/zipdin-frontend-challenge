@@ -2,15 +2,39 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/core/models/book.model';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'book-card',
   templateUrl: './book-card.component.html',
-  styleUrls: ['./book-card.component.scss']
+  styleUrls: ['./book-card.component.scss'],
+  animations: [
+    trigger('openDetails', [
+      transition(':enter', [
+        style({
+          transformOrigin: 'top center',
+          transform: 'scaleY(0)',
+          opacity: 1,
+        }),
+        animate('200ms', style({
+          transform: 'scaleY(1)',
+        }))
+      ]),
+      transition(':leave', [
+        style({
+          transformOrigin: 'top center',
+        }),
+        animate('200ms', style({
+          transform: 'scaleY(0)',
+        }))
+      ])
+    ]),
+  ],
 })
 export class BookCardComponent implements OnInit {
 
   @Input() book: Book;
+  detailsOpen: boolean = false;
 
   constructor(
     private _snackBar: MatSnackBar
@@ -42,6 +66,10 @@ export class BookCardComponent implements OnInit {
     localStorage.setItem('@favoriteBooks', JSON.stringify(favoriteBooks));
 
     this.openSnackbar(isAdd);
+  }
+
+  setDetails() {
+    this.detailsOpen = !this.detailsOpen;
   }
 
   openSnackbar(isAdd: boolean) {
