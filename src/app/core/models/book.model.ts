@@ -6,9 +6,8 @@ export interface Book {
   printType: string;
   publishedDate: string;
   thumbnail: string;
-  smallThumbnail: string;
   authors: String[];
   categories: String[];
   isFavorite: boolean;
-  totalItems: number;
+  totalItems?: number;
 }

@@ -14,7 +14,6 @@ import { MaterialModule } from './material.module';
 import { BookCardComponent } from './shared/components/book-card/book-card.component';
 import { NoResultsComponent } from './shared/components/no-results/no-results.component';
 import { BooksListComponent } from './shared/components/books-list/books-list.component';
-import { BookDetailsComponent } from './pages/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { BookDetailsComponent } from './pages/book-details/book-details.componen
     BookCardComponent,
     NoResultsComponent,
     BooksListComponent,
-    BookDetailsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -34,7 +32,7 @@ import { BookDetailsComponent } from './pages/book-details/book-details.componen
     MaterialModule
   ],
   providers: [
-    BooksService
+    BooksService,
   ],
   bootstrap: [AppComponent]
 })

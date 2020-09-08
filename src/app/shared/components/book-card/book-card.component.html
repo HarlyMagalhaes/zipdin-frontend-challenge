@@ -8,6 +8,7 @@
   <div class="card-content">
     <mat-card-title>{{book.title}}</mat-card-title>
     <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
+    <mat-card-content @openDetails *ngIf="detailsOpen">{{book.description}}</mat-card-content>
     <mat-card-actions>
       <button mat-icon-button color="primary" (click)="favorite(book.id, !book.isFavorite)"
         aria-label="Example icon button with a heart icon">
@@ -19,9 +20,9 @@
           <mat-icon>favorite_border</mat-icon>
         </ng-template>
       </button>
-      <a [routerLink]="['/', book.id] " mat-button color="primary">
-        Mais detalhes <mat-icon>arrow_forward</mat-icon>
-      </a>
+      <button mat-button color="primary" (click)="setDetails()">
+        Mais detalhes <mat-icon>{{ detailsOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+      </button>
     </mat-card-actions>
   </div>
 </mat-card>

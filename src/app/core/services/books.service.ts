@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Book } from '../models/book.model';
 import { BooksParams } from '../models/books-api-params.model';
 
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +38,6 @@ export class BooksService {
                 categories: volumeInfo.categories,
                 description: volumeInfo.description,
                 thumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : '',
-                smallThumbnail: volumeInfo.imageLinks ? volumeInfo.imageLinks.smallThumbnail : '',
                 isFavorite: favoriteIds.includes(id),
                 printType: volumeInfo.printType,
                 publishedDate: volumeInfo.publishedDate,
